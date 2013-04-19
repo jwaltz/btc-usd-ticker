@@ -24,7 +24,7 @@ def priceChange(oldPrice, newPrice):
     if change < 0:
         return "{0:.3f}".format(change)
     elif change == 0:
-        return "=="
+        return "===="
     else:
         return "+" + "{0:.3f}".format(change)
 
@@ -32,15 +32,18 @@ def printTickerData(data):
     global count
     global lastPrice
 
-    if count == 0:
-        print "LAST - " + str(data['ticker']['last']) + "(==)",    
-    else :
-        print "LAST - " + str(data['ticker']['last']) + "(" + priceChange(lastPrice, data['ticker']['last']) + ")",    
+    printLastDelta(count, data)
     print "| HIGH - " + str(data['ticker']['high']),
     print "| LOW - " + str(data['ticker']['low']),
-    print "| Loop - " + str(count)
+    print "| run#" + str(count)
 
     count += 1
     lastPrice = data['ticker']['last']
+
+def printLastDelta(count, data):
+    if count == 0:
+        print "LAST - " + str(data['ticker']['last']) + "(====)",    
+    else :
+        print "LAST - " + str(data['ticker']['last']) + "(" + priceChange(lastPrice, data['ticker']['last']) + ")",
 
 getTicker()
